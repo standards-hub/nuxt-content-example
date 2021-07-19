@@ -6,7 +6,6 @@
 ![GitHub](https://img.shields.io/github/license/ninest/nuxt-content-example?style=flat-square)
 [![Buy Me A Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?style=flat-square)](https://www.buymeacoffee.com/ninest)
 
-Check out the live demo at [nuxt-content-example.surge.sh](https://nuxt-content-example.surge.sh/) and the [tutorial here](https://neutrinone.now.sh/creating-a-static-website-with-nuxt-content).
 
 **Relevant documentation:**
 - [Nuxt components](https://github.com/nuxt/components)
