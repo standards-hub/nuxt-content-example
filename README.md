@@ -77,8 +77,6 @@ export default {
 </script>
 ```
 
-View the tutorial for pages and posts [here](https://neutrinone.now.sh/creating-a-static-website-with-nuxt-content).
-
 ### Hosting
 Statically generate the site by running
 
@@ -102,15 +100,3 @@ To host the `dist/` folder, run
 surge dist
 ```
 
-If you haven't yet created an account, the CLI will guide you through the steps. You can choose a custom `*.surge.sh` domain.
-
-Check out the live demo for this site at [nuxt-content-example.surge.sh](https://nuxt-content-example.surge.sh/).
-
-## ♥️ Support
-If you liked this project, consider supporting by
-- ⭐️ Starring the repository
-- 🎒 Checking out my other [projects](https://github.com/ninest)
-- ☕️ Buying me [coffee](https://www.buymeacoffee.com/ninest)
-
-## 📜 License
-MIT
