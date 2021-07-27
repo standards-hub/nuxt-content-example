@@ -1,57 +1,47 @@
 <template>
   <Default :title="doc.title">
-    <div>{{ doc.prueba }}</div>
-    <div>{{ doc.subjects.image }}</div>
+     <div>
+    <Navbar />
+     </div>
+    
+  <div class="home">
+  <div class="tier" style="padding: 50px 1px;">
+    <div class="container" style="margin-top: 90px;"> 
      <table style="table-layout: fixed;width: 1200px;">
        <tr style="border: 1px solid #ffffff00;">
-        <td style="text-align: center;" v-for="(item, index) in title" :key="index">{{ item }}</td>
-       </tr>
-       <tr style="background: white; ">
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item1, index1) in items1" :key="index1">{{ item1 }}</button>
+         <td class="td" v-for="subject in doc.subjects"><img style="font-size: 50px; margin-left: 25px;" src="~static/assets/img/icon/hire.png" class="imagen"/></td>      
+      </tr>
+      <tr style="border: 1px solid #ffffff00;">
+        <td style="text-align: center;" v-for="subject in doc.subjects">{{ subject.title }}</td>
+      </tr>
+      <tr style="background: white;">
+        <td class="td" v-for="subject1 in doc.subjects">
+            <button class="button button2" v-for="item in subject1.items" v-if="item.status === 'enable'">
+              {{ item.title }}
+            </button>
+            <button class="button button3" v-for="item in subject1.items" v-if="item.status === 'progres'">
+              {{ item.title }}
+            </button>
+            <button class="button button4" v-for="item in subject1.items" v-if="item.status === 'not'">
+              {{ item.title }}
+            </button>
         </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item2, index2) in items2" :key="index2">{{ item2 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item3, index3) in items3" :key="index3">{{ item3 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item4, index4) in items4" :key="index4">{{ item4 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item5, index5) in items5" :key="index5">{{ item5 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item6, index6) in items6" :key="index6">{{ item6 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item7, index7) in items7" :key="index7">{{ item7 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item8, index8) in items8" :key="index8">{{ item8 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item9, index9) in items9" :key="index9">{{ item9 }}</button>
-        </td>
-        <td class="td"> 
-          <button class="button button4 button2" v-for="(item10, index10) in items10" :key="index10">{{ item10 }}</button>
-        </td>
-       </tr>
-       
+      </tr>
      </table>
-     <div>
+    </div>
+  </div>
   </div>
   </Default>
 </template>
 
-
 <script>
+ import Navbar from "../components/Navbar";
+
 export default {
   head() {
     return {
       titleTemplate: `%s`,
-      title: 'Nuxt Content Example',
+      title: 'CIM',
     }
   },
   async asyncData({$content, params}) {
@@ -59,22 +49,9 @@ export default {
     return { doc }
   },
   name: "BaseBlock",
-  data() {
-    return {
-      title: ["Setup", "Hire", "Produce", "Market", "Sell", "Service", "Fulfill","Interact", "Finance", "Analyze"],
-      items1: ["Software Host", "Software Tenant", "Software User", "Software App", "Software Test", "Software Service", "Soft. Batch Job","IoT Device", "Data Model"],
-      items2: ["Job Application", "Employee", "Compensation", "Training", "Location", "Work Territory", "Work Report","Biz Process", "Biz Continuity"],
-      items3: ["Supplier", "Product", "Inventory Received", "Inventory Product", "Inventory Transfer", "Electronic Media", "Purchase Order","Sales Agreement"],
-      items4: ["Party", "Party Resolution", "Privacy Consent", "Market Audience", "Campaign", "Promotion", "Trade Event","Ad Buy", "Web Site"],
-      items5: ["Price Book", "Shopping Cart", "Quote", "Contract", "Opportunity", "Opportunity Forecast", "Sales Order","Loyalty Program", "Loyalty Program"],
-      items6: ["AI Assistant", "Asset", "Web Content", "Case", "Task", "Event"],
-      items7: ["Fulfillment Order", "Shipment", "Return Order", "Work Order", "Work Resource", "Work Forecast"],
-      items8: ["Engagement", "Conversation", "Appointment", "Software Event", "Data Connector", "Data Movement", "Loyalty Journey"],
-      items9: ["Budget", "Invoice", "Payment Method", "Payment", "Credit Memo", "Financial Ledger", "Account Forecast","Calendar", "Tax Policy"],
-      items10: ["AI Model", "AI Application", "IoT Device Use", "Data Lineage", "Blockchain", "Survey", "Loyalty Journal"],
-    };
-  },
-
+  components: { 
+    Navbar 
+  }
 }
 </script>
 <style>
@@ -120,5 +97,5 @@ th, td {
 h5{
   color: rgb(120, 9, 148)
 }
- 
+
 </style>

@@ -1,8 +1,0 @@
-@import "screen.scss";
-
-:root {
-  --side-padding: 23%;
-  @include mobile-screen {
-    --side-padding: 5%;
-  }
-}

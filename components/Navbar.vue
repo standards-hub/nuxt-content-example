@@ -1,65 +1,30 @@
 <template>
   <header>
-    <div class="title">Nuxt Content</div>
-    <nav>
-      <ul>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/about">About</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/contact-us">Contact</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/posts">Posts</nuxt-link>
-        </li>
-        <li>
-          <a href="https://github.com/ninest/nuxt-content-example" target="_blank">GitHub</a>
-        </li>
-      </ul>
-    </nav>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background: rgb(255 255 255);border: 1px solid #d0c6c6;">
+  <div class="container">
+      <div class="navbar-header">
+          <button class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" type="button" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <img src="~static/assets/img/cim-text-hztl-color.png" style="max-width: 345px;margin-top: 5px;">
+        </a>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar">
+        <ul class="nav navbar-nav">                  
+                <li><a class="page-link" href="https://cloudinformationmodel.org" target="_blank" style="color: #000">Website</a></li>
+                <li><NuxtLink to="/table" style="color: #000">Subject Areas</NuxtLink></li>
+                <li><a class="page-link" target="_blank" href="https://github.com/cloudinformationmodel"><i class="fab fa-github-alt" style="color: #000"></i></a></li>
+            
+        </ul>
+    </div>
+      <!--/.nav-collapse -->
+  </div>
+  <!--/.container-fluid -->
+</nav>
   </header>
 </template>
 
-<style lang="scss" scoped>
-header {
-  padding: 0.8em var(--side-padding);
-  border-bottom: 1px solid #ddd;
-
-  .title {
-    font-weight: 600;
-    font-size: 1.2em;
-
-    margin-bottom: 0.2em;
-  }
-
-  nav {
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-
-      display: flex;
-
-      overflow-x: scroll;
-
-      li {
-        a {
-          color: #333;
-          text-decoration: none;
-
-          &:hover {
-            font-weight: bold;
-            text-decoration: underline;
-          }
-        }
-      }
-      li + li {
-        margin-left: 1em;
-      }
-    }
-  }
-}
-</style>
