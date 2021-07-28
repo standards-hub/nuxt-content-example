@@ -1,9 +1,9 @@
 <template>
   <Default :title="doc.title">
      <div>
-    <Navbar />
+      <Navbar />
+      <Footer />
      </div>
-    
   <div class="home">
   <div class="tier" style="padding: 50px 1px;">
     <div class="container" style="margin-top: 90px;"> 
@@ -16,15 +16,23 @@
       </tr>
       <tr style="background: white;">
         <td class="td" v-for="subject1 in doc.subjects">
-            <button class="button button2" v-for="item in subject1.items" v-if="item.status === 'enable'">
+            <button class="button button4 button2" v-for="item in subject1.items" v-if="item.status === 'enable'">
               {{ item.title }}
             </button>
-            <button class="button button3" v-for="item in subject1.items" v-if="item.status === 'progres'">
+            <button class="button button4 button3" v-for="item in subject1.items" v-if="item.status === 'progres'">
               {{ item.title }}
             </button>
             <button class="button button4" v-for="item in subject1.items" v-if="item.status === 'not'">
               {{ item.title }}
             </button>
+        </td>
+      </tr>
+      <tr style="background: white; ">
+        <td class="td">
+          <button class="button button4 button2" style="margin-top: 35px;">Available</button>
+        </td>
+        <td class="td">
+          <button class="button button4 button3" style="margin-top: 35px;" >Coming Spring '21</button>
         </td>
       </tr>
      </table>
@@ -36,6 +44,7 @@
 
 <script>
  import Navbar from "../components/Navbar";
+ import Footer from "../components/Footer";
 
 export default {
   head() {
@@ -48,9 +57,9 @@ export default {
     const doc = await $content('index').fetch();
     return { doc }
   },
-  name: "BaseBlock",
   components: { 
-    Navbar 
+      Footer,
+      Navbar
   }
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div class="home">
        <Navbar />
+       <Footer />
     <div class="tier">
       <div class="container">
         <div style="width:1213px">
@@ -27,22 +28,23 @@
 </template>
 
 <script>
- import Navbar from "../components/Navbar";
-
-export default {
-  head() {
-    return {
-      titleTemplate: `%s`,
-      title: 'CIM - Table',
+    import $ from "jquery";
+    import Navbar from "../components/Navbar";
+    import Footer from "../components/Footer";
+    export default {
+        head() {
+            return {
+            titleTemplate: `%s`,
+            title: 'CIM - Table',
+            }
+        },
+        async asyncData({$content, params}) {
+            const doc = await $content('about').fetch();
+            return { doc }
+        },
+        components: {
+          Footer,
+          Navbar
+        }
     }
-  },
-  async asyncData({$content, params}) {
-    const doc = await $content('about').fetch();
-    return { doc }
-  },
-  components: { 
-    Navbar 
-  }
-}
 </script>
-
