@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 export default {
   target: 'static',
   mode: 'universal',
@@ -22,14 +24,22 @@ export default {
       { rel: 'stylesheet', href: "./assets/css/styles.css", body: true},
       { rel: 'icon', href: "./assets/img/cim-color.png", type: "image/png"},
     ],
-    css: [
-      '~/assets/styles/bootstrap-theme.min.css',
-      '~/assets/styles/bootstrap.min.css',
-      "~/assets/styles/styles.css"
-    ]
+    script: [
+      { src: "./assets/js/jquery.min.js", body: true },
+      {src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", type: "text/javascript" },
+    ],
+    plugins: ["~plugins/jquery-min.js"],
   },
 
-  bluid: {},
+  build: {
+	  vendor: ['jquery', 'bootstrap'],
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$': 'jquery'
+      })
+    ]
+},
+
   buildModules: ["@nuxt/components"],
   modules: [
     '@nuxt/content',
