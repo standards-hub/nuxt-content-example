@@ -4,32 +4,31 @@
        <Footer />
     <div class="tier">
       <div class="container">
-        <div style="width:1213px">
-           <table class="table-striped table-bordered; box-shadow: 0px 10px 10px -6px black;" style="margin-top: 150px;">
+          <table id="customers" style="margin-top: 80px;">
             <thead>
               <tr style="background-color: #65b2e8;color: #FFFF;">
-                <th scope="col">Columna1</th>
-                <th scope="col">Columna2</th>
-                <th scope="col">Columna3</th>
-                <th scope="col">Columna4</th>
-                <th scope="col">Columna5</th>
-                <th scope="col">Columna6</th>
-                <th scope="col">Columna7</th>
-                <th scope="col">Columna8</th>
-                <th scope="col">Columna9</th>
-                <th scope="col">Columna10</th>
+                <th scope="col">Domain</th>
+                <th scope="col">Subject Areas</th>
+                <th scope="col">Version</th>
+                <th scope="col">Published</th>
+                <th scope="col">Docs</th>
+                <th scope="col">Description</th>
+                <th scope="col">GitHub</th>
               </tr>
-              <tr >
-                <td scope="col" v-for="subject in doc.subjects">{{ subject.title }}</td>  
-              </tr>
-              <tr >
-                <td scope="col" v-for="subject in doc.subjects">{{ subject.title }}</td>  
-              </tr>
-              <tr >
-                <td scope="col" v-for="subject in doc.subjects">{{ subject.title }}</td>  
-              </tr>
-              <tr >
-                <td scope="col" v-for="subject in doc.subjects">{{ subject.title }}</td>  
+            </thead>
+            <thead v-for="domains of table.domains" >
+              <tr v-for="subjectAreas of domains.subjectAreas">
+                <td>{{ domains.name }}</td>
+                <td>{{ subjectAreas.name }}</td>
+                <td v-for="versions of subjectAreas.versions">{{ versions.version }}</td>
+                <td v-for="versions of subjectAreas.versions">{{ versions.versionDate.year }}/{{ versions.versionDate.month }}/{{ versions.versionDate.day }}</td>
+                <td v-for="versions of subjectAreas.versions">
+                  <a :href="versions.diagramURL" target="_blank"><img src="~static/assets/img/doc.png" style="height:20px; width:20px"></a>
+                </td>
+                <td v-for="versions of subjectAreas.versions" style="font-size: 14px;">{{ versions.descriptionURL }}</td>
+                <td v-for="versions of subjectAreas.versions" >
+                  <a :href="versions.gitHubURL" target="_blank"><img src="~static/assets/img/github.png" style="height:20px; width:20px"></a>
+                </td>
               </tr>
             </thead>
             <tbody id="con">
@@ -38,14 +37,9 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
 <script>
-    import $ from "jquery";
     import Navbar from "../components/Navbar";
     import Footer from "../components/Footer";
     export default {
@@ -56,173 +50,46 @@
             }
         },
         async asyncData({$content, params}) {
-          const doc = await $content('index').fetch();
-          return { doc }
+            const doc = await $content('about').fetch();
+            return { doc }
         },
         components: {
           Footer,
           Navbar
-        }
+        },
+        data() {
+          return {
+            table: []
+          }
+        },
+      async fetch() {
+        this.table = await fetch(
+          'https://raw.githubusercontent.com/standards-hub/cim_github_pages/gh-pages/cim_subject_areas_library.json'
+        ).then(res => res.json())
+      }
     }
-
-    $(document).ready(function () {
-    var dt = $('#tablaUsuarios').dataTable();
-    dt.fnDestroy();
-  });
-  $(document).ready(function () {
-    const url = 'https://raw.githubusercontent.com/standards-hub/cim_github_pages/gh-pages/cim_subject_areas_library.json';
-    var table = $('#tablaUsuarios').DataTable({
-
-      ajax: {
-        url: url,
-        dataSrc: function (json) {
-          let j = json;
-          let jf = [];
-          for (let i = 0, ien = json.domains.length; i < ien; i++) {
-            for (let j = 0, jen = json.domains[i].subjectAreas.length; j < jen; j++) {
-              for (let k = 0, ken = json.domains[i].subjectAreas[j].versions.length; k < ken; k++) {
-                let name = json.domains[i].name;
-                let subjectAreas = json.domains[i].subjectAreas[j].name;
-                let version = json.domains[i].subjectAreas[j].versions[k].version;
-                let versionDate = json.domains[i].subjectAreas[j].versions[k].versionDate;
-                let diagramURL = json.domains[i].subjectAreas[j].versions[k].diagramURL;
-                let descriptionURL = json.domains[i].subjectAreas[j].versions[k].descriptionURL;
-                let gitHubURL = json.domains[i].subjectAreas[j].versions[k].gitHubURL;
-                jf.push({
-                  name: name,
-                  subjectAreas: subjectAreas,
-                  version: version,
-                  versionDate: (versionDate.year + '-' + versionDate.month + '-' + versionDate.day),
-                  diagramURL: diagramURL,
-                  descriptionURL: descriptionURL,
-                  gitHubURL: gitHubURL
-                });
-              }
-            }
-          }
-          return jf;
-        }
-      },
-      columns: [
-        {
-          "data": "name",
-          "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).css('vertical-align', 'top')
-            $(nTd).css('padding', '44px 10px')
-          },
-          "render": function (data, type, row, meta) {
-            return data;
-          }
-        },
-        {
-          "data": "subjectAreas",
-          "render": function (data, type, row, meta) {
-            return data;
-          }
-        },
-        {
-          "className": "text-center",
-          "data": "version",
-          "render": function (data, type, row, meta) {
-            return data;
-          }
-        },
-        {
-          "className": "text-center",
-          "data": "versionDate",
-          "render": function (data, type, row, meta) {
-            return data;
-          }
-        },
-        {
-          "className": "text-center",
-          "data": "diagramURL",
-          "render": function (data, type, row, meta) {
-            return '<a href="' + data + '" target="_blank"><img src="./img/doc.png" "height="20" width="20"></a>';
-          }
-        },
-        {
-          "data": "descriptionURL",
-          "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).css('font-size', '14px')
-          },
-          "render": function (data, type, row, meta) {
-            return data;
-          }
-        },
-        {
-          "className": "text-center",
-          "data": "gitHubURL",
-          "render": function (data, type, row, meta) {
-            return '<a href="' + data + '" target="_blank"><img src="./img/github.png" "height="20" width="20"></a>';
-          }
-        },
-      ],
-      order: [[0, 'asc'], [1, 'asc'], [2, 'asc'], [3, 'asc']],
-      rowsGroup: [0],
-      rowReorder: {
-        dataSrc: 'name',
-      },
-      'rowsGroup': [0],
-      "columnDefs": [
-        { "orderable": false, "targets": [4, 5, 6] },
-      ]
-    });
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const search = urlParams.get('search')
-    if (search) {
-      table.search(search);
-    }
-
-
-    $('#all').on('click', function () {
-      table.search('').columns().search('').draw();
-    });
-
-    $('#last').on('click', function () {
-      table.column(2).search('1.1').draw();
-    });
-
-    $('#sel1').change(function () {
-      if (this.value === "All") {
-        table
-          .columns(0)
-          .search('')
-          .draw();
-      } else {
-        table
-          .columns(0)
-          .search(this.value)
-          .draw();
-      }
-    });
-    $('#sel2').change(function () {
-      if (this.value === "All") {
-        table
-          .columns(0)
-          .search('')
-          .draw();
-      } else {
-        table
-          .search(this.value)
-          .draw();
-      }
-    });
-    $('#sel3').change(function () {
-      if (this.value === "All") {
-        table
-          .columns(1)
-          .search('')
-          .draw();
-      } else {
-        table
-          .columns(1)
-          .search(this.value)
-          .draw();
-      }
-    });
-  });
-
 </script>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #65b2e8;
+  color: white;
+}
+</style>
