@@ -26,13 +26,12 @@ export default {
     ],
     script: [
       { src: "./assets/js/jquery.min.js", body: true },
-      {src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", type: "text/javascript" },
     ],
     plugins: ["~plugins/jquery-min.js"],
   },
 
   build: {
-	  vendor: ['jquery', 'bootstrap'],
+    vendor: ['jquery', 'bootstrap'],
     plugins: [
       new webpack.ProvidePlugin({
         '$': 'jquery'
@@ -53,7 +52,7 @@ export default {
       const { $content } = require('@nuxt/content')
       const pages = await $content().only(['path']).fetch()
       const posts = await $content('posts').only(['path']).fetch()
-      
+
       const files = [...pages,...posts,]
 
       return files.map(file => file.path === '/index' ? '/' : file.path)
