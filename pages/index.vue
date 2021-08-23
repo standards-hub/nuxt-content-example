@@ -7,7 +7,7 @@
   <div class="home">
   <div class="tier" style="padding: 50px 1px;">
     <div class="container" style="margin-top: 90px;"> 
-     <table style="table-layout: fixed;width: 1200px;">
+     <table id="tablaUsuarios" style="table-layout: fixed;width: 1200px;">
        <tr style="border: 1px solid #ffffff00;">
          <td class="td" v-for="subject in doc.subjects"><img style="font-size: 50px; margin-left: 25px;" src="~static/assets/img/icon/hire.png" class="imagen"/></td>      
       </tr>
@@ -51,6 +51,10 @@ export default {
     return {
       titleTemplate: `%s`,
       title: 'CIM',
+      script: [
+        { src: "./assets/js/jquery.min.js", body: true },
+        {src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", type: "text/javascript" },
+      ],
     }
   },
   async asyncData({$content, params}) {
@@ -60,9 +64,10 @@ export default {
   components: { 
       Footer,
       Navbar
-  }
+  },
 }
 </script>
+
 <style>
   .button1 {background-color: #e7e7e7; color: black; border-color: #efefef;}
   .button2 {background-color: #DAE8FC; border: 4px solid #00285f; color: rgb(120, 9, 148); }

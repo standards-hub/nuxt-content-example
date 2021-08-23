@@ -22,17 +22,20 @@ export default {
       { rel: 'stylesheet', href: "./assets/css/bootstrap.min.css", body: true},
       { rel: 'stylesheet', href: "./assets/css/jquery.dataTables.min.css", body: true},
       { rel: 'stylesheet', href: "./assets/css/styles.css", body: true},
+      { rel: 'stylesheet', href: "https://cdn.datatables.net/v/dt/sp-1.3.0/sl-1.3.3/datatables.min.css", body: true},
       { rel: 'icon', href: "./assets/img/cim-color.png", type: "image/png"},
     ],
     script: [
       { src: "./assets/js/jquery.min.js", body: true },
-      {src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", type: "text/javascript" },
+      { src: "https://cdn.datatables.net/v/dt/sp-1.3.0/sl-1.3.3/datatables.min.js", body: true },
+      { src: "https://cdn.datatables.net/v/dt/sp-1.3.0/sl-1.3.3/datatables.min.css", body: true },
+
     ],
     plugins: ["~plugins/jquery-min.js"],
   },
 
   build: {
-	  vendor: ['jquery', 'bootstrap'],
+    vendor: ['jquery', 'bootstrap'],
     plugins: [
       new webpack.ProvidePlugin({
         '$': 'jquery'
@@ -53,7 +56,7 @@ export default {
       const { $content } = require('@nuxt/content')
       const pages = await $content().only(['path']).fetch()
       const posts = await $content('posts').only(['path']).fetch()
-      
+
       const files = [...pages,...posts,]
 
       return files.map(file => file.path === '/index' ? '/' : file.path)
